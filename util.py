@@ -5,7 +5,11 @@ GENRES = ['blues','classical','country','disco','hiphop','jazz','metal','pop','r
 
 GENRE_LABELS = {}
 for i in range(len(GENRES)):
-    GENRES_LABELS[GENRES[i]] = i
+    GENRE_LABELS[GENRES[i]] = i
+
+def main():
+    partition = read_csv("data/features_3_sec.csv")
+    print(partition.F)
 
 def read_csv(filename):
     """
@@ -51,3 +55,6 @@ def read_csv(filename):
         F[keys[i]] = vals[i]
 
     return Partition(data, F, len(GENRES)) #hardcode number of labels for this lab
+
+if __name__ == '__main__':
+    main()
