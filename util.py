@@ -8,7 +8,7 @@ for i in range(len(GENRES)):
     GENRE_LABELS[GENRES[i]] = i
 
 def main():
-    partition = read_csv("data/features_3_sec.csv")
+    partition = read_csv("data/sample_3_sec.csv")
     print(partition.F)
 
 def read_csv(filename):
@@ -25,15 +25,16 @@ def read_csv(filename):
 
     for row in csv_file: #get feature names
         for key in row:
-            keys.append(key)
+            if key not in ['filename', 'length']:
+                keys.append(key)
         break
 
     vals = [[] for i in range(len(keys))] #one list for each feature
 
     for row in csv_file: #add values to each list (feature) in vals
-        for i in range(len(row)):
-            if row[i] not in vals[i]: #no duplicates
-                vals[i].append(row[i])
+        for i in range(2, len(row)):
+            if row[i] not in vals[i - 2]: #no duplicates
+                vals[i - 2].append(row[i])
 
 
     csv_file = csv.reader(open(filename, 'r'), delimiter=',') #reopen file
@@ -43,10 +44,10 @@ def read_csv(filename):
     for row in csv_file:
         ex_features = {}
         ex_label = 0
-        for i in range(len(row)): #here we hardcode the example for this lab
+        for i in range(len(row)-2): #here we hardcode the example for this lab
             for genre in GENRES:
                 if genre in row[i]:
-                    ex_label = GENRE_LABELS[row[i]]
+                    ex_label = GENRE_LABELS[genre]
             else:
                 ex_features[keys[i]] = row[i]
         data.append(Example(ex_features, ex_label))
