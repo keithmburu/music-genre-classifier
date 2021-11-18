@@ -4,7 +4,7 @@ GENRES = ['blues','classical','country','disco','hiphop','jazz','metal','pop','r
 
 GENRE_LABELS = {}
 for i in range(len(GENRES)):
-    GENRES_DICT[GENRES[i]] = i
+    GENRES_LABELS[GENRES[i]] = i
 
 def read_csv(filename):
     """
