@@ -1,5 +1,4 @@
 """
-CS260 Project
 Confusion Matrix class
 Author: Keith Mburu
 Author: Matt Gusdorff

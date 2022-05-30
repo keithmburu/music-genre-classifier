@@ -1,5 +1,4 @@
 """
-CS260 Project
 Entropy class for sorting features based on information gain
 Author: Keith Mburu
 Author: Matt Gusdorff

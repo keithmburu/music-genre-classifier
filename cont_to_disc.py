@@ -1,5 +1,4 @@
 """
-CS260 Project
 Converting continuous train and test features to discrete
 Author: Keith Mburu
 Author: Matt Gusdorff

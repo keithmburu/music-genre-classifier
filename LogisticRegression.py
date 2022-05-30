@@ -1,5 +1,4 @@
 """
-CS260 Project
 Logistic Regression class for test classification
 Author: Keith Mburu
 Author: Matt Gusdorff

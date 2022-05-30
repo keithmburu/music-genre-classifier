@@ -1,5 +1,4 @@
 """
-CS260 Project
 Utility contains methods for data preprocessing and data persistence
 Author: Keith Mburu
 Author: Matt Gusdorff

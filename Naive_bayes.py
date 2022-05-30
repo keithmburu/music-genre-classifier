@@ -1,5 +1,4 @@
 """
-CS260 Project
 Categorical Naive Bayes from scratch and using sklearn's implementation
 Adapted from lab 5
 Author: Keith Mburu

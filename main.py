@@ -1,5 +1,4 @@
 """
-CS260 Project
 A driver file for implementing our various methods
 Author: Keith Mburu
 Author: Matt Gusdorff

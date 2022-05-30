@@ -1,5 +1,4 @@
 """
-CS260 Project
 Example and partition classes with labels
 Adapted from Lab 5 (Sara Mathieson)
 Author: Keith Mburu

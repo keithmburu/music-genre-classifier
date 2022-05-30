@@ -1,5 +1,4 @@
 """
-CS260 Project
 PCA, t-SNE visualizations
 Author: Keith Mburu
 Author: Matt Gusdorff
