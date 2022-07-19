@@ -1,4 +1,12 @@
-#borrows from lab 5
+"""
+CS260 Project
+Example and partition classes with labels
+Adapted from Lab 5 (Sara Mathieson)
+Author: Keith Mburu
+Author: Matt Gusdorff
+Date: 12/17/2021
+"""
+
 class Example:
 
     def __init__(self, features, label):
@@ -18,3 +26,10 @@ class Partition:
 
         # number of classes
         self.K = K
+
+        temp = []
+        for example in self.data:
+            if example.label not in temp:
+                temp.append(example.label)
+
+        self.labels = temp
