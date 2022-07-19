@@ -1,4 +1,15 @@
-def convert_one(f, data, F_disc):
+"""
+CS260 Project
+Converting continuous train and test features to discrete
+Author: Keith Mburu
+Author: Matt Gusdorff
+Date: 12/17/2021
+"""
+
+import os
+import util
+
+def convert_feature(f, data, F_disc):
     """
     Convert one feature (name f) from continuous to discrete.
     Credit: adapted from lab 6, based on original code from Ameet Soni.
@@ -20,8 +31,6 @@ def convert_one(f, data, F_disc):
         else:
             if u_label[elem[0]] != elem[1]:
                 u_label[elem[0]] = None
-    # print(unique)
-    # print(u_label)
 
     # find switch points (label changes)
     switch_points = []
@@ -36,13 +45,50 @@ def convert_one(f, data, F_disc):
         key = f+"<="+str(s)
         for i in range(len(data)):
             if float(data[i].features[f]) <= s:
-                data[i].features[key] = 1
+                data[i].features[key] = "True"
             else:
-                data[i].features[key] = 0
+                data[i].features[key] = "False"
         # print(key)
-        F_disc[key] = [0, 1]
+        F_disc[key] = ["False", "True"]
         # print(F_disc[key])
 
     # delete this feature from all the examples
     for example in data:
         del example.features[f]
+
+def refeaturize(train_partition, test_partition, test_file):
+    """
+    Replaces the continuous features of each test example with the 
+    discrete features of the train examples
+    """
+    test_partition_refeaturized = test_partition
+    if os.path.exists("objects/refeaturized_" + test_file + ".pkl"):
+        print("\nloading refeaturized\n", )
+        test_partition_refeaturized = util.object_load("refeaturized_" + test_file)
+    else:
+        # refeaturizing test examples
+        test_partition_refeaturized.F = train_partition.F.copy()
+        discrete_features = list(train_partition.F.keys())
+        print("\nrefeaturizing\n")
+        for example in test_partition_refeaturized.data:
+            j = 0
+            done = 0
+            old_features = list(example.features.keys())
+            for i in range(len(old_features)):
+                old_feature = old_features[i]
+                feature_value = example.features[old_feature]
+                while old_feature in discrete_features[j] and not done:
+                    new_feature = discrete_features[j]
+                    disc_feature_threshold = discrete_features[j].replace(old_feature + "<=", "")
+                    if feature_value <= disc_feature_threshold:
+                        example.features[new_feature] = "True"
+                    else:
+                        example.features[new_feature] = "False"
+                    if j+1 < len(discrete_features):
+                        j += 1
+                    else:
+                        done = 1
+                del example.features[old_feature]
+        print("\nstoring refeaturized\n")
+        util.object_store(test_partition_refeaturized, "refeaturized_" + test_file)
+    return test_partition_refeaturized
